@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+
+
+<body>
+    sdfsdfsdfsdf coucou
+    {{ dump(members) }}
+    {{ member_id }}
+    {{ adj }}
+
+    <p>prenom {{ members.firstname }} nom {{ members.lastname }} avec n°id = {{ member_id }} et adj = {{ adj }}</p>
+    <p></p>
+    <p></p>
+    {% include 'member/footer.html.twig' %}
+    {% block blabla %}
+        texte par défaut
+    {% endblock %}
+
+    {% block coucou %}
+        texte par défaut
+    {% endblock %}
+</body>
+</html>

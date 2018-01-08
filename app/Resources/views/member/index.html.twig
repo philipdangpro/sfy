@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}" />
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" /> -->
+    <!--  -->
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12">
+            <h1>Members</h1>
+            <table class="table table-striped">
+                <tr>
+                    <th>image</th>
+                    <th>First name</th>
+                    <th>Last name</th>
+                    <th></th>
+                </tr>
+                {% for key,value in members %}
+                <tr>
+                    <td><img src="http://lorempixel.com/50/50/people/{{ key }}" class="img-responsive img-circle" /></td>
+                    <td>{{ value.firstname }} member{{ key }}</td>
+                    <td>{{ value.lastname }} member{{ key }}</td>
+                    <td><a href="{{ url('member.details', {"memberId" : key}) }}" class="btn btn-primary">Details</a></td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>

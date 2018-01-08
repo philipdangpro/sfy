@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{#{% form_theme form 'bootstrap_3_layout.html.twig' %}#}
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+
+{% block body %}
+
+    {#
+        fonctions_twig:
+            form_start: création de la balise <form>
+            form_end: creation de la balise </form>
+            form_label: intitulé d'un champ
+            form_widget: création d'un champ
+            form_errors: erreur d'un champ
+            la variable est envoyée par le contrôleur
+    #}
+
+
+
+    {{ form_start(form, {'attr' : { 'novalidate' : 'novalidate'} }) }}
+        <p>
+            {{ form_label(form.firstname, 'Prénom: ') }}
+            {{ form_widget(form.firstname, {'attr' : { 'placeholder' : 'un placeholder'} }) }}
+            {{ form_errors(form.firstname) }}
+        </p>
+        <p>
+            {{ form_label(form.lastname, 'Nom :') }}
+            {{ form_widget(form.lastname) }}
+        </p>
+        <p>
+            {{ form_label(form.email, 'Email :') }}
+            {{ form_widget(form.email) }}
+        </p>
+        <p>
+            {{ form_label(form.message, 'Message :') }}
+            {{ form_widget(form.message) }}
+        </p>
+
+        <input type="submit" name="valider" value="Valider" class="btn btn-info"/>
+
+    {{ form_end(form) }}
+
+    {{ form_errors(form.firstname) }}
+    {{ form_errors(form.lastname) }}
+    {{ form_errors(form.email) }}
+    {{ form_errors(form.message) }}
+
+    {%  for key,value in '1'..'z' %}
+        <p>{{ value }}</p>
+    {% endfor %}
+
+{% endblock %}

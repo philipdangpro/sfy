@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{% block title %}Mon site{% endblock %}</title>
+    {# asset : lien vers les ressources externes (img, css, js) #}
+    <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}"/>
+
+
+</head>
+<body>
+    dans parent
+
+<script src="{{ asset('js/jquery-3.2.1.slim.min.js') }}"></script>
+
+
+
+    <div class="container">
+            <div class="row">
+            {# include : inclusion #}
+            {% include 'inc/header.html.twig' %}
+            {# blocs à remplir dans le template enfant #}
+            {% block main %}{% endblock %}
+            {% block aside %}{% endblock %}
+        </div>
+    </div>
+    <script src="{{ asset('js/popper.min.js') }}"></script>
+<script src="{{ asset('js/bootstrap.min.js') }}"></script>
+</body>
+</html>

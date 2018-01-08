@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Ma page twig</h1>
+    <p>{{ macle }}</p>
+
+    {{ 'uugug ughsdfu dusfudysgf' | slugify }}
+
+<div>{{ my_test() }}</div>
+{#
+    {% dump(date) %}
+    {% set postDate = date('2012-08-12') %}
+    {% set dateDiff = date_diff(postDate) %}
+------------------------------
+    {% dump(postDate) %}
+    ------------------------------
+#}
+
+
+==========================================================
+
+    <ul>
+        {% for key, value in liste %}
+        <li>la clé est {{ key }} et la valeur est : {{ value }}, je concat comme ça {{ key ~ value }}</li>
+        {% endfor %}
+
+    </ul>
+
+    <ul>
+        {% for i in '2'..'5' %}
+            <li>la valeur indice est : {{ i }}</li>
+        {% endfor %}
+
+    </ul>
+
+    {# set : variable #}
+    {% set meteo = 'storm' %}
+    {{ meteo }} {{ meteo }}
+
+{{ dump(liste)}}
+
+
+{# filtre: utilisation capitalize upper #}
+    <p>{{ 'coucou' | upper }}</p>
+    <p>il y a {{ liste | length }} lettres</p>
+
+{# set : variable #}
+{% set meteo = 'tempete' %}
+{% if meteo == 'yoh' %}
+    on affiche la meteo si c'est égal à yoh
+{% endif %}
+
+{# date:  date() création d'une date, date : affichage d'une date #}
+
+    {% set now = date('now') %}
+{{ now | date('d/m/Y') }}
+{# dump(app.user.headers.get("host")) #}
+
+{#
+    app: accès aux informations de l'application
+        app.request : requête
+        app.user : utilisateur connecté
+        app.environnement (dev ou prod)
+
+#}
+
+
+
+</body>
+</html>
