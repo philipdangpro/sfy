@@ -45,8 +45,11 @@
     {{ form_errors(form.email) }}
     {{ form_errors(form.message) }}
 
-    {%  for key,value in '1'..'z' %}
-        <p>{{ value }}</p>
-    {% endfor %}
+    {#{%  for key,result in '1'..'z' %}#}
+        {#<p>{{ result.firstname }}</p>#}
+        {#<p>{{ result.lasstname }}</p>#}
+        {#<p>{{ result.email }}</p>#}
+        {#<p>{{ result.message }}</p>#}
+    {#{% endfor %}#}
 
 {% endblock %}

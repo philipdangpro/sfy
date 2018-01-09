@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Response;
 class DefaultController extends Controller
 {
     /**
-     * @Route("/co", name="default.index")
+     * @Route("/", name="default.index")
      */
     public function indexAction(Request $request)
     {

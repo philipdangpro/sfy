@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Contact</h1>
+    {% for notice in app.flashes('notice') %}
+        <p class="">{{ notice }}</p>
+    {% endfor %}
+
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>id</th>
+            <th>prenom</th>
+            <th>nom</th>
+            <th>email</th>
+            <th>message</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+
+    <tbody>
+    {% for key, result in results %}
+    <tr>
+        <td>{{ key + 1 }}</td>
+        <td>{{ result.firstname }}</td>
+        <td>{{ result.lastname }}</td>
+        <td>{{ result.email }}</td>
+        <td>{{ result.message}}</td>
+        <td class="btn "><a href="{{ url('contact.form.update', {'id' :result.id }) }}">modifier</a></td>
+        <td class="btn "><a href="{{ url('contact.form.delete', {'id' :result.id }) }}">supprimer</a></td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

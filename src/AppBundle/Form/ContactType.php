@@ -3,6 +3,7 @@
 namespace AppBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CountryType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -34,7 +35,6 @@ class ContactType extends AbstractType
                     new NotBlank([
                         'message' => "Vous n'avez pas saisi votre nom"
                     ]),
-
                     new Regex([
                         'message' => "votre prénom n'est pas valide REGEX",
                         'pattern' => "/[a-zA-Z '-]+/"
@@ -64,6 +64,7 @@ class ContactType extends AbstractType
                 ]
             ])
             ->add('message', TextareaType::class)
+            ->add('country', CountryType::class)
         ;
     }/**
      * {@inheritdoc}

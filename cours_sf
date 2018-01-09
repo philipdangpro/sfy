@@ -1,0 +1,297 @@
+/========================================\
+LISTE DES QUESTIONS A POSER
+|========================================|
+
+yaml
+json
+composer
+rest
+api
+soap
+paypal
+slimpay
+redis
+memcache
+solar
+elastic search
+les emails
+coinbase
+faire des tests unitaires
+comment brancher public avec nodejs, sass et autres
+htaccess
+l'internationalisation
+
+connaissance
+	paiement
+	tunnel d'achat
+
+.........TODOLIST.........
+créer compte github
+créer compte gitlab
+
+
+\========================================/
+
+.phar : php archive
+
+le php est de base dans l'espace "global"
+
+
+
+6x12
+
+
+antislash : \Datetime (l'antislash est un séparateur de directory)
+
+c'est mieux d'écrire un chemin complet pour le namespace
+
+Dans le composer.json, on créé : un namespace
+	
+src : les sources
+
+on crée un dossier "source", \App
+
+Psr-4 : demande que les namespaces suivent l'arborescence des vrais dossiers, attention, c'est juste une norme, en soit, on est pas obligé de la suivre.
+
+
+
+{
+  "autoload" : {
+    "psr-4" : {
+      "App\\" : "src/" ==> on définit le dossier physique qui va servir de raçine au namespace
+    }
+  }
+}
+
+
+
+
+composer dumpautoload : crée les vendors
+
+vendor contient les bibliothèques externes utilisées
+
+le dossier src est censé contenir que des classes
+
+à partir de ce moment-là : quand php va lire un fichier php, il va faire le require
+
+installer htop
+
+quand j'installe php, il y a déjà un serveur intégré nommé environ "php built-in"
+
+sluger/slugifier : reformate le texte
+
+--les fonctions--
+public : pubf
+prof
+prif
+
+on peut typer le retour de la fonction 
+	public function myFunction():string ou rien si mixed
+
+
+
+
+
+Interface ne contient que les noms des méthodes
+
+
+
+Dans les frameworks PHP, généralement, c'est :
+Interface
+|
+v
+Abstract Class
+|
+v
+Class
+
+on écrit MyClass extends AbstractMyClass implements InterfaceMyClass
+
+
+
+Trait : on peut voir ça comme un require de code, c'est moche et c'est pas utilisé dans SF
+    //import d'un trait
+    //c'est comme un require, disons que c'est un trait horizontal
+    //pour les traits, on écrit le use DANS LA CLASSE, c'est d'ailleurs à ça qu'on reconnaît les traits
+
+
+======================Symfony======================
+utilisé par SF, Laravel, Drupal, etc.
+le principe, c'est qu'il y a plein de composants
+	ex:
+		Templating : Twig
+		Form
+		Validator
+
+Différence entre SF3 et SF4
+	SF3 : on installe tous les composants, fonctionne sur PHP5 ou 7
+	SF4 : on installe juste les composants dont on a besoin
+
+packagist, parler de bundle, comme ça, on sait que c'est du sfy
+faire des tests
+
+ajd, dans tous les frameworks php, tout part de l'url
+
+
+======================Symfony LISTE CMD======================
+#pour l'install
+composer create-project symfony/framework-standard-edition sfy
+puis faire <Entrée> jusqu'à la fin
+
+configurer l'envt :
+	dans parameters.yml
+	config_dev.yml
+
+
+app.php, c'est le front controller, c'est lui qui route
+
+la route, c'est l'url
+un commentaire est différent d'une annotation
+
+pour AppBundle\Controller, la route, c'est / (cf les annotations)
+dans les annotations, il n'y a que des doubles guillemets
+on peut éventuellement écrire plusieurs annotations
+
+
+
+
+tous les controllers doivent être suffixés par Controller
+structure de la classe
+	Class MyClass {
+
+	/**
+	* @Route "/laroute","lenomderoute"
+	*/
+	public function indexAction()
+	{
+		le template
+	}
+
+	}
+
+
+nom: controleur.action
+dossier vue : controleur
+fichier vue : action
+
+
+$this->render( view:'default/hello.html.twig')
+{{clé du param}}
+
+
+
+
+Symfony\Component\HttpFoundation\Response
+
+pour avoir le profiler, il faut le body
+équivalent de $_REQUEST
+
+dans sf, on dit service pour dire classe
+c'est la classe Container, qui permet l'injection de dépendance
+
+Installer le plugin pour SF3.4
+File > Settings > Plugins > Browse repositories > "symfony" > Install > restart
+
+
+
+
+
+
+
+
+{{ macle}}
+{#comment}
+{% instructions %}
+
+
+TWIG
+
+set mavariable
+
+for key,value in montableau
+endfor
+
+date
+
+now | date('dmy')
+
+php bin/console debug:twig
+php bin/console debug:???
+php bin/console debug:twig
+
+
+pour Twig, on peut utiliser Twig getFunctions et getFunctions
+
+pour la mise en page, on a une notion de parent/enfant
+par exemple : base.html.twig, est un parent. Les parents sont créés à la raçine, les enfants dans les dossiers
+
+layout définit les zone de blocs
+template remplit les blocs
+
+
+======================================================================================
+=                                     DOCTRINE                                       =
+======================================================================================
+
+php bin/console doctrine:database:create
+
+doctrine fonctionne 
+	postBase
+	MySQL
+	Oracle
+	MySQLServer
+
+
+php bin/console doctrine:schema:update -f
+php bin/console doctrine:generate:form AppBundle:Contact
+
+
+
+
+PARTIE FORM
+
+            {{ form_label(form.lastname, 'Nom :') }}
+            {{ form_widget(form.lastname) }}
+            {{ form_label(form.email, 'Email :') }}
+            {{ form_widget(form.email) }}
+            {{ form_label(form.message, 'Message :') }}
+            {{ form_widget(form.message) }}
+
+
+
+
+
+
+
+form
+je crée un user
+puis un autre
+puis un autre
+
+
+utilisation des form.errors
+	dans google chercher :
+		symfony validation constraints
+		symfony form type
+
+
+        $builder
+            ->add('firstname', TextType::class, [
+                'constraints' => [
+                    new NotBlank([
+                        'message' => "Vous n'avez pas saisi votre nom"
+                    ]),
+
+                    new Regex([
+                        'message' => "votre prénom n'est pas valide REGEX",
+                        'pattern' => "/[a-zA-Z '-]+/"
+                    ])
+
+                ]
+            ])
+
+
+Doctrine
+	peut utiliser
+		getManager pour UPDATE, DELETE, INSERT
+		getRepository : SELECT ou autre
