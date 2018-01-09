@@ -18,6 +18,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use AppBundle\Entity\Country;
 
 class ContactController extends Controller
 {
@@ -36,10 +37,13 @@ class ContactController extends Controller
          * */
         $rc = $doctrine->getRepository(Contact::class);
         $results = $rc->findAll();
+        $rccountry = $doctrine->getRepository(Country::class);
+        $countries = $rccountry->findAll();
 
 
         return $this->render('contact/index.html.twig', [
-            'results' => $results
+            'results' => $results,
+            'countries' => $countries
         ]);
     }
 
@@ -119,9 +123,6 @@ class ContactController extends Controller
         $entity = $rc->find($id);
         $em->remove($entity);
         $em->flush();
-
-
-
 
         $this->addFlash("notice", "le user " . $id . " a été supprimé");
 

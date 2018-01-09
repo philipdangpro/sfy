@@ -160,12 +160,42 @@ class Contact
      * @ORM\ManyToOne(targetEntity="Country")
      * @ORM\JoinColumn(name="country_id", referencedColumnName="id")
      */
+    //orm many to one : type d'association
+    //orm join column, le nom et à quelle colonne la colonne country_id de Contact est liée dans la table Country
     //la colonne de jointure est country_id qui est liée à la colonne de clé primaire id
+    //on parle de propriété relationnelle
     private $country;
 
+    /**
+     * Set country
+     *
+     * @param \AppBundle\Entity\Country $country
+     *
+     * @return Contact
+     */
+    public function setCountry(\AppBundle\Entity\Country $country = null)
+    {
+        $this->country = $country;
 
+        return $this;
+    }
 
+    /**
+     * Get country
+     *
+     * @return \AppBundle\Entity\Country
+     */
+    public function getCountry()
+    {
+        return $this->country;
+    }
+
+    /**
+     * Many Contacts have Many Languages.
+     * @ORM\ManyToMany(targetEntity="Language", inversedBy="contacts")
+     * @ORM\JoinTable(name="contacts_languages")
+     */
+    private $languages;
 
 
 }
-

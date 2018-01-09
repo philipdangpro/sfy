@@ -6,6 +6,9 @@
         <p class="">{{ notice }}</p>
     {% endfor %}
 
+    {{ dump(results)}}
+    {{ dump(countries)}}
+
 
 <table class="table table-striped">
     <thead>
@@ -15,19 +18,35 @@
             <th>nom</th>
             <th>email</th>
             <th>message</th>
+            <th>pays</th>
+            <th>langues</th>
             <th></th>
             <th></th>
         </tr>
     </thead>
 
+
+
     <tbody>
     {% for key, result in results %}
     <tr>
-        <td>{{ key + 1 }}</td>
+        <td>{{ result.id }}</td>
         <td>{{ result.firstname }}</td>
         <td>{{ result.lastname }}</td>
         <td>{{ result.email }}</td>
-        <td>{{ result.message}}</td>
+        <td>{{ result.message }}</td>
+        <td>{{ result.country ? result.country.name : 'Non défini' }}</td>
+        <td>
+            {% if result.languages | length > 0  %}
+                {% for language in result.languages %}
+                    {{ result.languages.name }}
+                {% endfor %}
+            {% else %}
+                N/A
+            {% endif %}
+        </td>
+
+        <td></td>
         <td class="btn "><a href="{{ url('contact.form.update', {'id' :result.id }) }}">modifier</a></td>
         <td class="btn "><a href="{{ url('contact.form.delete', {'id' :result.id }) }}">supprimer</a></td>
     </tr>

@@ -9,6 +9,9 @@
 
 namespace AppBundle\Twig;
 
+use AppBundle\Entity\Training;
+use Symfony\Bridge\Doctrine\ManagerRegistry;
+
 /*
  * création de fonctions et filtre twig:
  *  classe extends Twig_Extension
@@ -66,4 +69,11 @@ class AppExtension extends \Twig_Extension
         return implode('-',explode(' ', $value));
     }
 
+    public function displayTrainingNav(ManagerRegistry $doctrine)
+    {
+        $em = $doctrine->getRepository(Training::class);
+        $trainings = $em->findAll();
+
+        return $trainings;
+    }
 }

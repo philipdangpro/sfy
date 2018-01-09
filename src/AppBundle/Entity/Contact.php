@@ -189,4 +189,54 @@ class Contact
     {
         return $this->country;
     }
+
+    /**
+     * Many Contacts have Many Languages.
+     * @ORM\ManyToMany(targetEntity="Language", inversedBy="contacts")
+     * @ORM\JoinTable(name="contacts_languages")
+     */
+    private $languages;
+
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->languages = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add language
+     *
+     * @param \AppBundle\Entity\Language $language
+     *
+     * @return Contact
+     */
+    public function addLanguage(\AppBundle\Entity\Language $language)
+    {
+        $this->languages[] = $language;
+
+        return $this;
+    }
+
+    /**
+     * Remove language
+     *
+     * @param \AppBundle\Entity\Language $language
+     */
+    public function removeLanguage(\AppBundle\Entity\Language $language)
+    {
+        $this->languages->removeElement($language);
+    }
+
+    /**
+     * Get languages
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getLanguages()
+    {
+        return $this->languages;
+    }
 }

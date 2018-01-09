@@ -2,6 +2,10 @@
 
 namespace AppBundle\Form;
 
+use AppBundle\Entity\Contact;
+use AppBundle\Entity\Country;
+use AppBundle\Entity\Language;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CountryType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
@@ -9,6 +13,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Count;
 use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Regex;
@@ -63,8 +68,53 @@ class ContactType extends AbstractType
                     ])
                 ]
             ])
-            ->add('message', TextareaType::class)
-            ->add('country', CountryType::class)
+            ->add('message', TextareaType::class, [
+                'constraints' => [
+                    new NotBlank([
+                        'message' => "vous n'avez pas saisi votre message"
+                    ])
+                ]
+            ])
+            //ça permet de faire le lien à une FK
+            /*
+             * champ relié à une entité : EntityType
+             *      class: permet de cibler l'entité
+             *      placeholder : permet de définir le texte affiché dans le champ par défaut
+             */
+            ->add('country', EntityType::class, [
+                'class' => Country::class,
+                'choice_label' => 'name', //ici on parle de la colonne name de Country
+                'placeholder' => 'Veuillez sélectionner un pays',
+                'constraints' => [
+                    new NotBlank([
+                        'message' => "vous n'avez pas saisi votre message",
+                    ])]
+            ])
+            /*
+             * gestion de l'affichage des champs multiples
+             *      expanded: afficher plusieurs champs
+             *      multiple : récupérer plusieurs valeurs
+             *      par défaut : false pour les 2 propriétés
+             *
+             *      select : expanded => false / multiple => false
+             *      radio : expanded => true / multiple => true
+             *
+             * checkbox est obligatoire pour les many-to-many
+             */
+            ->add('languages', EntityType::class,
+            [
+                'class' => Language::class,
+                'choice_label' => 'name',
+                'expanded' => true,
+                'multiple' => true,
+                'constraints' => [
+                    new Count([
+                        'min' => 1,
+                        'minMessage' => 'il faut sélectionner au moins {{ limit }} langue'
+                    ])
+                ]
+            ])
+
         ;
     }/**
      * {@inheritdoc}

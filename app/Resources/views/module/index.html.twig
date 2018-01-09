@@ -1,0 +1,37 @@
+{% extends 'base.formation.html.twig'%}
+
+{% block formation_nav %}
+    <div class="row">
+        <div class="col-xs-12">
+            <ul class="nav nav-pills">
+                {% for key, module in modules %}
+                    <li><a href="{{ url('module.index', {id: module.id}) }}">{{ module.name }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    {#{{ dump(modules) }}#}
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="jumbotron">
+                <h1>{{ module.name ? module.name : "Ce module n'existe pas"}}</h1>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block menu %}
+    <div class="row">
+        <div class="col-xs-12">
+            <h2>Liste des formations</h2>
+            <ul class="list-group">
+                {% for key, training in module.trainings %}
+                    <li class="list-group-item"><a href="{{ url('training.show', {'id' : training.id}) }}">{{ training.name }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+{% endblock %}
