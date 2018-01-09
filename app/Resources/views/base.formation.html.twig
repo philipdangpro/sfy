@@ -8,11 +8,13 @@
 <body>
 <div class="container">
 
+    {{  render_menu() | raw  }}
+
     {% for notice in app.flashes('notice') %}
         <p class="">{{ notice }}</p>
     {% endfor %}
 
-    {% block formation_nav %}Formation{% endblock %}
+    {#{% block formation_nav %}Formation{% endblock %}#}
 
     {% block content %}{% endblock %}
 

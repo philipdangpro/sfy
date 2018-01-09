@@ -1,0 +1,14 @@
+
+<div class="row">
+    <div class="col-xs-12">
+        <ul class="nav nav-pills">
+        {% for result in results %}
+            <li><a class="" href="{{  url('training.show', {'id' : result.id}) }}(">
+                    {{ result.name }}
+                </a>
+            </li>
+            <li>{{ app.request.get('id') }}</li>
+        {% endfor %}
+        </ul>
+    </div>
+</div>alert-success

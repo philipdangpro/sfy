@@ -295,3 +295,136 @@ Doctrine
 	peut utiliser
 		getManager pour UPDATE, DELETE, INSERT
 		getRepository : SELECT ou autre
+
+c'est ici qu'on ajoute des contraintes sur les colonnes de la base
+/**
+     * @var string
+     *
+     * @ORM\Column(name="email", type="string", length=100, unique=true)
+     */
+    private $email;
+
+
+
+
+la clé étrangère est forcément du côté many
+
+
+DOCTRINE RELATION ET JOINTURE
+	Many-to-one unidirectional
+
+
+php bin/console doctrine:generate:entity
+	shortcut name : AppBundle:Country
+	annotation
+	nom des champs
+
+dans EntitéRepository, on rentre : 
+
+//mettre à jour le schéma
+php bin/console doctrine:schema:update -f
+
+
+php bin/console doctrine:generate:entities
+
+//genere les getter setters
+php bin/console doctrine:generate:entities AppBundle:Contact
+
+    //orm many to one : type d'association
+    //orm join column, le nom et à quelle colonne la colonne country_id de Contact est liée dans la table Country
+    //la colonne de jointure est country_id qui est liée à la colonne de clé primaire id
+    //on parle de propriété relationnelle
+
+
+ContactType, c'est la classe de formulaire
+	on rajoute la mthd add()
+
+ne pas oublier le slash entre ORM et le contenu de l'annotation
+@ORM\UneAnnotationDoctineDansSymfony
+
+
+
+pour générer un form, on utilise 
+doctrine:generate:form
+
+
+CREATION D'UNE TABLE LANGUE avec relation M-M avec Contact
+1. on crée l'entité en ligne de commande
+	php bin/console doctrine:generate:entity
+2. tjrs nommé avec AppBundle
+3. on nomme et on type les champs
+4. on ajoute les annotations pour créer les 1-n n-n etc
+	php bin/console doctrine:generate:entity
+5. on fait le schéma update
+	php bin/console doctrine:schema:update -f
+
+différence entre add et set
+	add pour n-n
+	set pour 1-1 ou 1-n
+
+
+
+
+
+
+Utilisation d'une méthode custom avec Twig
+	Fonction Twig
+		|___il faut requêter__donc on utilise_Doctrine
+		|___on a besoin d'un résultat___pour afficher une vue__donc on a besoin de la classe Twig
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/
+	/blog (layout blog)
+	/mentions-legales (layout base)
+	/informations-pratiques (layout base)
+	/contact (layout formulaire contact)
+	/login (layout login)
+	/category/{id} (layout base)
+		/category/article/{id} (layout base)
+
+	/admin/login (layout admin_login)
+
+
+
+
+
+
+

@@ -10,7 +10,6 @@
 namespace AppBundle\Twig;
 
 use AppBundle\Entity\Training;
-use Symfony\Bridge\Doctrine\ManagerRegistry;
 
 /*
  * création de fonctions et filtre twig:
@@ -19,6 +18,27 @@ use Symfony\Bridge\Doctrine\ManagerRegistry;
 
 class AppExtension extends \Twig_Extension
 {
+    /*
+     * injection de services dans une classe autre qu'un contrôleur
+     *      créer une propriété par service
+     *      injecter les services par le constructeur
+     *
+     */
+    private $doctrine;
+    private $twig;
+
+    public function __construct(\Doctrine\Common\Persistence\ManagerRegistry $doctrine, \Twig_Environment $twig)
+    {
+        $this->doctrine = $doctrine;
+        $this->twig = $twig;
+    }
+
+
+
+
+
+
+
     /*
      * création d'une fonction
      *  renvoie un array de nvelles fctions
@@ -33,7 +53,20 @@ class AppExtension extends \Twig_Extension
         return [
             new \Twig_SimpleFunction('my_test',[$this, 'myTest']),
             new \Twig_SimpleFunction('date_diff',[$this, 'dateDiff']),
+            new \Twig_SimpleFunction('render_menu', [$this, 'renderMenu'])
         ];
+    }
+
+    public function renderMenu()
+    {
+        //requête avec le service doctrine
+        $rc = $this->doctrine->getRepository(Training::class);
+        $results = $rc->findAll();
+
+        //envoi des résultats à une vue partielle
+        return $this->twig->render('inc/training.nav.html.twig', [
+            'results' => $results
+        ]);
     }
 
     public function myTest()
@@ -69,11 +102,11 @@ class AppExtension extends \Twig_Extension
         return implode('-',explode(' ', $value));
     }
 
-    public function displayTrainingNav(ManagerRegistry $doctrine)
-    {
-        $em = $doctrine->getRepository(Training::class);
-        $trainings = $em->findAll();
-
-        return $trainings;
-    }
+//    public function displayTrainingNav(ManagerRegistry $doctrine)
+//    {
+//        $em = $doctrine->getRepository(Training::class);
+//        $trainings = $em->findAll();
+//
+//        return $trainings;
+//    }
 }
