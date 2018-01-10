@@ -138,21 +138,37 @@ class ContactRepository extends \Doctrine\ORM\EntityRepository
         ;
     }
 
-    public function testUpdate()
+    public function testUpdate($contactId = 21)
     {
         /*
- * retour de la requête : nombre de lignes modifiées
- */
+        * retour de la requête : nombre de lignes modifiées
+        */
         $this->getEntityManager()
             ->createQueryBuilder()
             ->update(Contact::class, 'contact')
             ->set('contact.firstname', ':paramFirstName')
             ->where('contact.id = :paramId')
             ->setParameters([
-                'paramFirstName' => 'toto',
-                'paramId' => 21
+                'paramFirstName' => 'TATA',
+                'paramId' => $contactId
             ])
             ->getQuery()
             ->execute();
     }
+
+    public function testDelete()
+    {
+        $result = $this->getEntityManager()
+            ->createQueryBuilder()
+            ->delete(Contact::class, 'contact')
+            ->where('contact.id = :paramId')
+            ->setParameters([
+                'paramId' => 20
+            ])
+            ->getQuery()
+            ->execute();
+
+        return $result;
+    }
+
 }

@@ -64,7 +64,7 @@ class DoctrineController extends Controller
     {
         $results = $doctrine
             ->getRepository(Contact::class)
-            ->testSixQuery();
+            ->testDelete();
         dump($results);
         die;
 
@@ -73,13 +73,14 @@ class DoctrineController extends Controller
     /**
      * @Route("/queryupdate", name="doctrine.queryupdate")
      */
-    public function updateAction(ManagerRegistry $doctrine):Response
+    public function updateAction(ManagerRegistry $doctrine, $contactId):Response
     {
         $result = $this
             ->getDoctrine()
             ->getRepository(Contact::class)
-            ->testUpdate()
+            ->testUpdate($contactId)
         ;
-die;
+
+        return null;
     }
 }

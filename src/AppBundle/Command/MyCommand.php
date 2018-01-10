@@ -10,6 +10,7 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Command\Command;
+use AppBundle\Entity\Contact;
 
 
 
@@ -30,7 +31,7 @@ class MyCommand extends ContainerAwareCommand
         $this
             ->setName('mycommand')
             ->setDefinition(array(
-                new InputArgument('command_name', InputArgument::OPTIONAL, 'The command name', 'mycommand'),
+                new InputArgument('contact_id', InputArgument::OPTIONAL, 'id du contact', '21'),
 //                new InputOption('format', null, InputOption::VALUE_REQUIRED, 'foo bar baz', 'txt'),
 //                new InputOption('raw', null, InputOption::VALUE_NONE, 'un autre'),
             ))
@@ -48,10 +49,15 @@ class MyCommand extends ContainerAwareCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $this->getContainer()->get('doctrine')->
         dump($input->getArguments());
-        dump($input->getFirstArgument());
-        dump($input->getOptions());
-//        dump($doctrineController->indexSixAction());
+        $contact_id = $input->getArguments()["contact_id"];
+        dump($contact_id);
+
+        $this
+            ->getContainer()
+            ->get('doctrine')
+            ->getRepository(Contact::class)
+            ->testUpdate($contact_id);
+
     }
 }

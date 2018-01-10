@@ -16,13 +16,18 @@ use Doctrine\Common\Persistence\ObjectManager;
 
 class ContactFixtures extends Fixture implements DependentFixtureInterface
 {
-        public function load(ObjectManager $manager)
+    public function load(ObjectManager $manager)
     {
+        $faker = \Faker\Factory::create('fr_FR');
+
         for($i = 0; $i < 20; $i++){
+
             $entity = new Contact();
-            $entity->setFirstname("firstname$i");
-            $entity->setLastname("lastname$i");
-            $entity->setEmail("email$i@gmail.com");
+            $firstname = $faker->firstName;
+            $lastname = $faker->lastname;
+            $entity->setFirstname($faker->firstName);
+            $entity->setLastname($faker->lastName);
+            $entity->setEmail($firstname . "." . $lastname . "@gmail.com");
             $entity->setMessage("lorem $i");
 
             /*
