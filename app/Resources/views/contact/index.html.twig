@@ -39,7 +39,7 @@
         <td>
             {% if result.languages | length > 0  %}
                 {% for language in result.languages %}
-                    {{ result.languages.name }}
+                    {{ language.name }}
                 {% endfor %}
             {% else %}
                 N/A

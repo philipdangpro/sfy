@@ -239,4 +239,5 @@ class Contact
     {
         return $this->languages;
     }
+
 }
