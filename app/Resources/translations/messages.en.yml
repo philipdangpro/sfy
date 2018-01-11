@@ -2,4 +2,6 @@ content:
   text: my text
   buttons:
     submit: submit
+  replacement: hello %name%, how are you ?
+
 

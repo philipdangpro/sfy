@@ -6,5 +6,15 @@
         filtre trans : permet de cibler une clé de traduction
             par défaut : recherche dans le domaine "messages"
     #}
-    <p>{{ 'content.text' | trans }}</p>
+    <p>{{ app.request.locale }}</p>
+    <div>{{ dump(app.request) }}</div>
+    <p>{{ 'content.text' | trans | capitalize }}</p>
+    <p>{{ 'content.replacement' | trans({'%name%' : 'ali'}) }}</p>
+    <div>
+        <h2>{{ 'title' | trans( {}, 'admin') }}</h2>
+
+    </div>
+
+    <time>{{ now | localizeddate }}</time>
+    <p>{{ 20000.99 | localizednumber('spellout') }}</p>
 {% endblock %}

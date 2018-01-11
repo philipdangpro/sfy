@@ -2,3 +2,4 @@ content:
   text: mon texte
   buttons:
     submit: valider
+  replacement: bonjour %name%, comment ça va ?
