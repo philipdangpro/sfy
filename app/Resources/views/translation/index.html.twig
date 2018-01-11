@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Traduction</h1>
+    {#
+        filtre trans : permet de cibler une clé de traduction
+            par défaut : recherche dans le domaine "messages"
+    #}
+    <p>{{ 'content.text' | trans }}</p>
+{% endblock %}

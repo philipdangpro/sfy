@@ -11,7 +11,8 @@ parameters:
 
 framework:
     #esi: ~
-    #translator: { fallbacks: ['%locale%'] }
+    #entourer une variable entre symbole-pourcentage va chercher les variables dans l'entrée "parameters"
+    translator: { fallbacks: ['%locale%'] }
     secret: '%secret%'
     router:
         resource: '%kernel.project_dir%/app/config/routing.yml'
